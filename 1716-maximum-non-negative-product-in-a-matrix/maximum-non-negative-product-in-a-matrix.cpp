@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // took help from gpt solve it again by yourself after some time
+    
     int maxProductPath(vector<vector<int>>& grid) {
         int m = grid.size(), n = grid[0].size();
         const int MOD = 1e9 + 7;
