@@ -4,8 +4,8 @@ public:
         int n=nums.size();//n=3
 
         int x=nums[0];//x=3
-        int count=1;//count=1
-        for(int i=1;i<n;i++){
+        int count=0;//count=1
+        for(int i=0;i<n;i++){
             if(count==0){
                 count=1;
                 x=nums[i];
