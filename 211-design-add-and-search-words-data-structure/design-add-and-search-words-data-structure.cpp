@@ -14,15 +14,13 @@ public:
         for(auto &s:mp[(int)word.size()]){
             bool hasfound=true;
             for(int i=0;i<s.size();i++){
-                if(word[i]!='.'){
-                    if(s[i]!=word[i])
-                    {
-                        hasfound=false;
-                        break;
-                    }
+                if(word[i]!='.' && s[i]!=word[i]){
+                    hasfound=false;
+                    break;
                 }
+            
             }
-            if(hasfound)return true;
+            if (hasfound)return true;
 
         }
         return false;
