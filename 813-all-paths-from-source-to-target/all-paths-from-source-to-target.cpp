@@ -5,14 +5,14 @@ public:
     int n;
     void dfs(int node,vector<int>& temp,vector<vector<int>>& adj){
         if(node==n-1){result.push_back(temp);return; }
-        visited[node]=true;
+        // visited[node]=true;
         for(auto &ngbr: adj[node]){
             if(!visited[ngbr]){
                 temp.push_back(ngbr);
-                visited[ngbr]=true;
+                // visited[ngbr]=true;
                 dfs(ngbr,temp,adj);
                 temp.pop_back();
-                visited[ngbr]=false;
+                // visited[ngbr]=false;
             }
 
 
