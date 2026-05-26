@@ -1,36 +1,17 @@
+const int Mod=1e9+7;
 class Solution {
 public:
-    const int M=1e9+7;
-    int dp[1000000];
-    int one;
-    int zero;
-    int high;
-    int low;
-    int solve(int l) {
-        bool in_range=false;
-        if(dp[l]!=-1)return dp[l];
-        if (l > high)
-            return 0;
-        
-        else if (l < low) {
-
-        }
-        else {
-            in_range=true;
-        }
-        int opt1 = solve(l+one)%M;
-        int opt2 = solve(l+zero)%M;
-       
-
-        return dp[l]= in_range +(opt1 + opt2)%M;
-    }
-
     int countGoodStrings(int low, int high, int zero, int one) {
-        this->one = one;
-        this->zero = zero;
-        this->high = high;
-        this->low = low;
-        memset(dp,-1,sizeof(dp));
-        return solve(0);
+        vector<int> dp(high + 1, 0);
+        dp[0] = 1;
+        for (int i = 1; i <= high; i++) {
+            dp[i] =
+                (dp[i]+(i >= one ? dp[i - one] : 0) + (i >= zero ? dp[i - zero] : 0))%Mod;
+        }
+        long long  ans = 0;
+        for (int i = low; i <= high; i++) {
+            ans =(ans+dp[i])%Mod;
+        }
+        return ans;
     }
 };
