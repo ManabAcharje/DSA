@@ -1,7 +1,7 @@
 class Solution {
 public:
     const int M=1e9+7;
-    int dp[1000001];
+    int dp[1000000];
     int one;
     int zero;
     int high;
