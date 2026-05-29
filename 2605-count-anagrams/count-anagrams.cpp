@@ -1,78 +1,43 @@
 class Solution {
 public:
-    const int MOD = 1e9 + 7;
-    vector<long long> fact, invFact;
-
+    const int Mod = 1e9 + 7;
+    vector<long long> fact;
     long long power(long long a, long long b) {
         long long res = 1;
-
-        while (b) {
-            if (b & 1)
-                res = (res * a) % MOD;
-
-            a = (a * a) % MOD;
+        while (b > 0) {
+            if (b & 1) {
+                res = (res * a) % Mod;
+            }
+            a = (a * a) % Mod;
             b >>= 1;
         }
-
         return res;
     }
-
-    void build(int n) {
+    void buildFactorials(int n) {
         fact.resize(n + 1);
-        invFact.resize(n + 1);
-
         fact[0] = 1;
-
         for (int i = 1; i <= n; i++) {
-            fact[i] = (fact[i - 1] * i) % MOD;
-        }
-
-        invFact[n] = power(fact[n], MOD - 2);
-
-        for (int i = n - 1; i >= 0; i--) {
-            invFact[i] = (invFact[i + 1] * (i + 1)) % MOD;
+            fact[i] = (fact[i - 1] * i) % Mod;
         }
     }
-
-    long long nCr(int n, int r) {
-        return (((fact[n] * invFact[r]) % MOD) * invFact[n - r]) % MOD;
-    }
-
     int countAnagrams(string s) {
-
-        build(s.size());
-
+        buildFactorials(s.size());
         stringstream ss(s);
         string word;
-
-        long long answer = 1;
-
+        long long ans = 1;
         while (ss >> word) {
-
-            sort(word.begin(), word.end());
-
-            int n = word.size();
-
-            long long ways = 1;
-
-            int len = 1;
-
-            for (int i = 1; i <= n; i++) {
-
-                if (i < n && word[i] == word[i - 1]) {
-                    len++;
-                } else {
-
-                    ways = (ways * invFact[len]) % MOD;
-                    len = 1;
+            vector<int> freq(26, 0);
+            for (char ch : word) {
+                freq[ch - 'a']++;
+            }
+            long long ways = fact[word.size()];
+            for (int f : freq) {
+                if (f > 1) {
+                    ways = (ways * power(fact[f], Mod - 2)) % Mod;
                 }
             }
-
-            ways = (ways * fact[n]) % MOD;
-
-            answer = (answer * ways) % MOD;
+            ans = (ans * ways) % Mod;
         }
-
-        return answer;
+        return ans;
     }
 };
