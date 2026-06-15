@@ -11,8 +11,7 @@ public:
         if (i == group.size())
             return prof >= minProfit;
 
-        int &ans = dp[i][members][prof];
-        if (ans != -1) return ans;
+        if(dp[i][members][prof]!=-1)return dp[i][members][prof];
 
         long long res = solve(i + 1, members, prof);
 
@@ -24,7 +23,7 @@ public:
             );
         }
 
-        return ans = res % MOD;
+        return dp[i][members][prof] = res % MOD;
     }
 
     int profitableSchemes(
