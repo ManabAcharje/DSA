@@ -1,14 +1,14 @@
 class Solution {
 public:
-    bool check(int l ,int r,vector<vector<int>> &covered_intervals){
-        for(auto &interval: covered_intervals){
-            int a = interval[0];
-            int b = interval[1];
-            if(l>=a && r<=b)return true;
+    // bool check(int l ,int r,vector<vector<int>> &covered_intervals){
+    //     for(auto &interval: covered_intervals){
+    //         int a = interval[0];
+    //         int b = interval[1];
+    //         if(l>=a && r<=b)return true;
 
-        }
-        return false;
-    }
+    //     }
+    //     return false;
+    // }
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
         // remove intervals 
         // i need to remove intervals that have been coved;
@@ -18,15 +18,20 @@ public:
         });
 
         int  n = intervals.size();
-        vector<vector<int>>covered_intervals;
+        // vector<vector<int>>covered_intervals;
         int removed= 0;
 
+        int maxEnd = -1;
         for(auto &interval: intervals){
             int l = interval[0];
             int r = interval[1];
-            if(check(l,r,covered_intervals))removed++;
+            // if(check(l,r,covered_intervals))removed++;
+            // else{
+            //     covered_intervals.push_back({l,r});
+            // }
+            if(r<=maxEnd)removed++;
             else{
-                covered_intervals.push_back({l,r});
+                maxEnd = r;
             }
         }
         return n - removed;
