@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> sequentialDigits(int low, int high) {
         // range query : 
-        vector<int> sequential_nums ={
+        static const vector<int> sequential_nums ={
 
          12,        23,       34,      45,     56,     67,   78,   89,
          123,       234,      345,     456,    567,    678,  789,
