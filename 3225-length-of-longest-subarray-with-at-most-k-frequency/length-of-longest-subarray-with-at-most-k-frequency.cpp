@@ -1,29 +1,30 @@
 class Solution {
 public:
     int maxSubarrayLength(vector<int>& nums, int k) {
-        // sliding window +  unordered_map;
-        //  what i will do if the freq of any char becomes greater than k then i
-        //  will move the i  the pointer until freq[char]<=k and update the
-        //  maxLen each time;
-        // return max Length;
-
         int n = nums.size();
         int i = 0;
-        
-        int longest = 0;
-
+        int j = 0;
+        int len = 0;
         unordered_map<int,int>freq;
-        for(int j = 0; j< n;j++){
-            freq[nums[j]]++;
-            while(freq[nums[j]]>k){
-                freq[nums[i]]--;
-                i++;
-            }
-            longest= max(longest,j-i+1);
-        }
-        return longest;
 
-       
-        
+        while(j<n){
+            int x = nums[j];
+            freq[x]++;
+            if(freq[x]<=k){
+                len = max(len,j-i+1);
+                j++;
+            }
+            else{
+                while(freq[x]!=k){
+                    freq[nums[i]]--;;
+                    i++;
+                }
+                len = max(len,j-i+1);
+                j++;
+            }
+
+
+        }
+        return len;
     }
 };
