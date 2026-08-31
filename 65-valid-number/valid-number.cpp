@@ -18,7 +18,9 @@ public:
     }
 
 bool decimal(string &s, int i, int j) {
-    if(i==j)return false;
+    if(i==j)return false;//introduced this line to avoid '.'
+
+    
 
     for (int pos = i; pos <= j; pos++) {
 
@@ -84,3 +86,8 @@ bool decimal(string &s, int i, int j) {
                //decimal (s, 0,2)
     }
 };
+
+//Goat
+// number can be integer// deci / or exponent
+// problem with edge cases
+
