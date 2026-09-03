@@ -10,7 +10,7 @@ public:
             if(num<smallestOdd && (num&1))smallestOdd = num;
            
         }
-        cout<<"smallest odd: "<<smallestOdd<<"\n";
+        // cout<<"smallest odd: "<<smallestOdd<<"\n";
 
 
         // try to make all even ;
@@ -23,7 +23,7 @@ public:
                 }
             }
         }
-        cout<<allEven<<"\n";
+        // cout<<allEven<<"\n";
         if(allEven)return true;
 
 
@@ -40,7 +40,7 @@ public:
                 }
             }
         }
-        cout<<allOdd<<endl;
+        // cout<<allOdd<<endl;
         return allOdd;
     }
 };
