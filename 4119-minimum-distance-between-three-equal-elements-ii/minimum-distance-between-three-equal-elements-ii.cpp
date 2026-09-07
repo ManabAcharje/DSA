@@ -1,26 +1,36 @@
 class Solution {
 public:
     int minimumDistance(vector<int>& nums) {
-        int n=nums.size();
-        unordered_map<int,vector<int>>mp;
-        int ans=INT_MAX;
-        for(int i=0;i<n;i++){
+        // if i use sliding window 
 
-            int sz=mp[nums[i]].size();
-            if(sz>=2){
-                int temp=2*(i-mp[nums[i]][sz-2]);
-                ans=min(ans,temp);
+        unordered_map<int,int> mp;
+        int n = nums.size();
+
+        int j = 0;
+        int i = 0;
+
+        int ans = INT_MAX;
+        while(j<n){
+            int num = nums[j];
+            // cout<<"num: "<<num<<endl;
+            mp[num]++;
+            // cout<<mp[num]<<endl;
+            if(mp[num]==3){
+                ans= min(ans, (j-i)*2);
+                
+                while(nums[i]!=num){
+                    mp[nums[i]]--;
+                    i++;
+                }
+                ans= min(ans, (j-i)*2);
+                mp[nums[i]]--;
+                i++;
+
             }
-            mp[nums[i]].push_back(i);
-            
+            j++;
         }
-        // for(auto &[u,v]:mp){
-        //     int sz=v.size();
-        //     if(sz>=3){
-        //         int temp=2*(v[2]-v[0]);
-        //         ans=min(ans,temp);
-        //     }
-        // }
-        return ans==INT_MAX?-1:ans;
+
+        return ans== INT_MAX?-1:ans;
+
     }
 };
