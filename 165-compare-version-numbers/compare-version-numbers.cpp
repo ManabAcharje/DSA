@@ -20,7 +20,7 @@ public:
                 j++;
             }
 
-            cout<<n1<<" "<<n2<<endl;
+            // cout<<n1<<" "<<n2<<endl;
             if(n1 < n2 )return -1;
             else if(n1 > n2)return 1;
 
