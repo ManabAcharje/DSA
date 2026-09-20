@@ -1,32 +1,36 @@
 class Solution {
 public:
-    int n ;
-    vector<int>coins;
-    vector<vector<long long >> dp;
-    long long  solve(int i , int target){
-        if(target == 0)return 0;
-
-        if(i<0)return INT_MAX;
-        if(dp[i][target]!=-1){
-            return dp[i][target];
-        }
-
-        long long  take = INT_MAX;
-        if(target>=coins[i]){
-            take = 1 + min(solve(i-1,target-coins[i]), solve(i,target-coins[i]));
-        }
-        long long  not_take = solve(i-1,target);
-
-        return dp[i][target] = min(take,not_take);
-    }
-    
     int coinChange(vector<int>& coins, int amount) {
-        
-        n = coins.size();
-        this->coins = coins;
-        dp.resize(n+1,vector<long long>(amount+1,-1));
-        return solve(n-1,amount)==INT_MAX?-1: (int)solve(n-1,amount);
+        int n = coins.size();
 
-        
+        vector<vector<int>> dp(n + 1, vector<int>(amount + 1, INT_MAX));
+
+        // target == 0
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 0;
+        }
+
+        // i = 1 means original i = 0
+        for (int i = 1; i <= n; i++) {
+
+            for (int target = 1; target <= amount; target++) {
+
+                // not_take
+                int not_take = dp[i - 1][target];
+
+                // take
+                int take = INT_MAX;
+
+                if (target >= coins[i - 1] &&
+                    dp[i][target - coins[i - 1]] != INT_MAX) {
+
+                    take = 1 + dp[i][target - coins[i - 1]];
+                }
+
+                dp[i][target] = min(take, not_take);
+            }
+        }
+
+        return dp[n][amount] == INT_MAX ? -1 : dp[n][amount];
     }
 };
