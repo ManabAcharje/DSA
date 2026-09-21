@@ -3,32 +3,21 @@ public:
     int longestConsecutive(vector<int>& nums) {
        
         unordered_set <int> st;
-        unordered_map<int,int>mp;
 
-        // unordered_set<int > seen ;
         int max_len = 0;
 
         st.insert(nums.begin(),nums.end());
-        for(int original_num : nums){
-            if(mp.count(original_num))continue;
-            int len = 1;
-            int curr_num = original_num;
-            while(st.count(curr_num+1)){
-                if(mp[curr_num+1]>=1){
-                    len+=mp[curr_num+1];
-                    break;
+        
+        for(auto num: st){
+            if(!st.count(num-1)){//means it is the starting num;
+                int len  = 1;
+                int copy  = num;
+                while(st.count(++copy)){
+                    len++;
                 }
-                else len++;
-                curr_num++;
+                max_len = max(len,max_len);
             }
-            mp[original_num] = len;
-            max_len = max(len ,max_len);
-            
         }
-        // for(auto it: mp){
-        //     cout<<it.first <<" "<<it.second<<endl;
-        // }
-        // cout<<max_len;
         return max_len;
 
     }
