@@ -12,11 +12,11 @@ public:
                 sum += nums[j];
                 int mod_sum = sum % k;
                 
-                if(mp.find(k - mod_sum) != mp.end())
+                if(mp.count(k - mod_sum))
                     len = max(len ,j-i+1);
-                else if(mp.find(- k - mod_sum) != mp.end())
+                else if(mp.count(- k - mod_sum))
                     len = max(len,j-i+1);
-                else if(mp.find(-mod_sum) != mp.end())
+                else if(mp.count(-mod_sum))
                      len = max(len , j-i+1);
             }
         }
