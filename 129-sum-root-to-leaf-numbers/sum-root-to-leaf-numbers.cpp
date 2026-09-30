@@ -15,13 +15,14 @@ public:
     int ans;
     void solve(TreeNode* root , int val) {
 
+        val = val * 10 + root->val;
+        
         if (!root->left && !root->right ) {
-            ans += val*10 + root->val;
+            ans += val;
             return;
         }
 
-        val = val * 10 + root->val;
-        cout<<val<<endl;
+        
 
 
         if(root->left)solve(root->left, val);
