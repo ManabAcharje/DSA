@@ -12,7 +12,7 @@ public:
         
         int ans = 0;
     
-        for(auto& d: dir){
+        for(const auto& d: dir){
             int ni = i+d[0];
             int nj = j+d[1];
 
