@@ -43,7 +43,7 @@ public:
                 else if(grid[i][j]==0 || grid[i][j] == 2)remaining++;
             }
         }
-        cout<<remaining<<" "<<endl;
+        // cout<<remaining<<" "<<endl;
         visited[x][y] = 1;
         return solve(x,y);
 
