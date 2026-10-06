@@ -19,7 +19,7 @@ public:
         // return st.size();
         int balance = 0;
         int ans  = 0;
-        for(int ch : s){
+        for(char &ch : s){
             if(ch == '('){
                 balance++;
             }
