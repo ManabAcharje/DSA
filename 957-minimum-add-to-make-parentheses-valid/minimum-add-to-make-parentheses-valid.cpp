@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int minAddToMakeValid(string s) {
+    int minAddToMakeValid(string &s) {
 
         // stack<int>st;
         // for(int ch : s){
