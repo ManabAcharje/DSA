@@ -1,26 +1,13 @@
 class Solution {
 public:
     int sumOfSquares(vector<int>& nums) {
-        long long sum = 0;
-        int n = nums.size();
-        int i = 1;
-        for(int x : nums){
-            // cout<<i<<endl;
-            // cout<<n<<endl;
-
-            // if(i == 0){
-            //     i=1;
-            //     continue;
-            // }
-            if((n%i)== 0){
-                // cout<<"here"<<endl;
-                sum +=(x*x);
+        int sum = 0;
+        for(int i = 0 ;i<nums.size();i++){
+            if(nums.size() % (i+1) ==0){
+                sum+= nums[i]*nums[i];
             }
-            // cout<<sum<<endl;
-            // cout<<endl;
-            i++;
 
         }
-        return (int) sum;
+        return sum;
     }
 };
