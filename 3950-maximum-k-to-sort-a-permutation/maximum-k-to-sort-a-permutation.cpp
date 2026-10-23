@@ -11,7 +11,7 @@ public:
             }else{
                 k&= nums[i];
             }
-            cout<<k<<"\n";
+            // cout<<k<<"\n";
         }
 
       }
