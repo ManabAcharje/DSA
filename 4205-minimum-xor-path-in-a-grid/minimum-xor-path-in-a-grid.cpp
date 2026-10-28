@@ -1,32 +1,38 @@
 class Solution {
 public:
-    int m , n ;
-    vector<vector<int>>grid;
-    // unordered_map<int,int>memo;
-    int memo[1001][1024];
-    int solve(int i, int j , int xor_val){
-        if(i == m-1 && j == n-1) return xor_val^grid[i][j];
-        int key = i*n + j;
-        if(memo[key][xor_val] != -1){
-            return memo[key][xor_val];
-        }
-        int right = 1024;
-        int down = 1024;
-
-        if(i + 1 < m){
-            right = solve(i+1,j, xor_val^grid[i][j]);
-
-        }
-        if(j + 1 < n){
-            down = solve(i,j+1,xor_val^grid[i][j]);
-        }
-        return memo[key][xor_val] = min(right,down); 
-    }
     int minCost(vector<vector<int>>& grid) {
-        m = grid.size();
-        n = grid[0].size();
-        memset(memo,-1,sizeof(memo));
-        this->grid = grid;
-        return solve(0,0,0);
+        int m = grid.size();
+        int n = grid[0].size();
+
+        const int X = 1024;
+        const int INF = 1e9;
+
+        vector<vector<int>> dp(m * n, vector<int>(X, INF));
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                int key = i * n + j;
+
+                for (int x = 0; x < X; x++) {
+                    if (i == m - 1 && j == n - 1) {
+                        dp[key][x] = x ^ grid[i][j];
+                        continue;
+                    }
+
+                    int nextXor = x ^ grid[i][j];
+                    int down = INF, right = INF;
+
+                    if (i + 1 < m)
+                        down = dp[(i + 1) * n + j][nextXor];
+
+                    if (j + 1 < n)
+                        right = dp[i * n + j + 1][nextXor];
+
+                    dp[key][x] = min(down, right);
+                }
+            }
+        }
+
+        return dp[0][0];
     }
 };
