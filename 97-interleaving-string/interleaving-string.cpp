@@ -1,45 +1,38 @@
 class Solution {
 public:
-    int  m;
-    int  n;
-    int  l;
-    string s , t, u;
-
-    int dp[101][101][201];
-    bool solve(int i , int j ,int k){
-        if (i == m && j == n &&  k == l){
-            return true;
-        }
-        if(dp[i][j][k]!=-1)return dp[i][j][k];
-        bool opt1 = false;
-        bool opt2 = false;
-        
-        if(i< m){
-            if( s[i] == u[k]){
-                opt1 = solve(i+1,j,k+1);
-            }
-        }
-        if(j < n){
-            if(t[j] == u[k]){
-                opt2 = solve(i, j+1, k+1);
-            }
-        }
-        return dp[i][j][k] = opt1 + opt2 ;
-
-
-
-    }
     bool isInterleave(string s1, string s2, string s3) {
-        m = s1.size();
-        n = s2.size();
-        l = s3.size();
-        s = s1;
-        t = s2;
-        u = s3;
+        bool dp[101][101][201] = {0};
+        int m = s1.size();
+        int n = s2.size();
+        int l = s3.size();
+        if (m + n != l)
+            return false;
+        dp[m][n][l] = 1;
 
-        if(m+ n != l )return false;
-        memset(dp,-1,sizeof(dp));
+        for (int i = m; i >= 0; i--) {
+            for (int j = n; j >= 0; j--) {
+                for (int k = l; k >= 0; k--) {
+                    if (i == m && j == n && k == l) {
+                        continue;
+                    }
 
-        return solve(0,0,0);
-    }  
+                    bool opt1 = false;
+                    bool opt2 = false;
+                    if (i < m && k < l) {
+                        if (s1[i] == s3[k]) {
+                            opt1 = dp[i + 1][j][k + 1];
+                        }
+                    }
+
+                    if (j < n && k < l) {
+                        if (s2[j] == s3[k]) {
+                            opt2 = dp[i][j + 1][k + 1];
+                        }
+                    }
+                    dp[i][j][k] = opt1 | opt2;
+                }
+            }
+        }
+        return dp[0][0][0];
+    }
 };
