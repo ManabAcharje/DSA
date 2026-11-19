@@ -17,15 +17,16 @@ public:
             xor_val^=nums[i];
         }
         int lsb = 1 << LSB(xor_val);
-        cout<<lsb<<endl;
+        // cout<<lsb<<endl;
+        
         int num1 = 0;
         int num2 = 0;
         for(auto &num : nums){
             if(num & lsb){
-                cout<<num<<" : one "<<endl;
+                // cout<<num<<" : one "<<endl;
                 num1^=num;
             }else{
-                cout<<num<<" : two "<<endl;
+                // cout<<num<<" : two "<<endl;
                 num2^=num;
 
             }
